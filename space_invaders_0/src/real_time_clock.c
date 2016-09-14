@@ -1,68 +1,106 @@
-#include "xgpio.h"          // Provides access to PB GPIO driver.
-#include <stdio.h>          // xil_printf and so forth.
-#include "platform.h"       // Enables caching and other system stuff.
-#include "mb_interface.h"   // provides the microblaze interrupt enables, etc.
-#include "xintc_l.h"        // Provides handy macros for the interrupt controller.
-#define ONE_SECOND_COUNT 100
-#define HALF_SECOND_COUNT 50
-#define DEBOUNCE_TIME 5
+// real_time_clock.c
+
+#include "xgpio.h"              // Provides access to PB GPIO driver.
+#include <stdio.h>              // xil_printf and so forth.
+#include "platform.h"           // Enables caching and other system stuff.
+#include "mb_interface.h"       // provides the microblaze interrupt enables, etc.
+#include "xintc_l.h"            // Provides handy macros for the interrupt controller.
+
+// Timing/clock constants
+#define ONE_SECOND_COUNT 100    // timer ticks in one second
+#define HALF_SECOND_COUNT 50    // timer ticks in half of a second
+#define DEBOUNCE_TIME 5         // timer ticks to wait for button to be stable
+#define MINS_SECONDS_MAX 59     // obviously...
+#define HOURS_MAX 23            // we use 24-hour (military) time
+
+// Bit masks
 #define SECONDS_BUTTON 0x02
 #define MINS_BUTTON 0x01
 #define HOURS_BUTTON 0x08
 #define INCREMENT_BUTTON 0x10
 #define DECREMENT_BUTTON 0x04
-#define MINS_SECONDS_MAX 59
-#define HOURS_MAX 23
+
+// We got tired of typing these, and it makes our code more readable
+// \r in PRINT_TIME ensures that we overwrite the old time
 #define PRINT_TIME 	xil_printf("%02d:%02d:%02d\r",hours,mins,seconds)
 #define INCREMENT(buttonState) (buttonState & INCREMENT_BUTTON)
 #define DECREMENT(buttonState) (buttonState & DECREMENT_BUTTON)
 
-XGpio gpLED; // This is a handle for the LED GPIO block.
-XGpio gpPB; // This is a handle for the push-button GPIO block.
+static XGpio gpLED;             // This is a handle for the LED GPIO block.
+static XGpio gpPB;              // This is a handle for the push-button GPIO block.
 
-void increment_seconds(int rollover);
-void increment_mins(int rolloever);
-void increment_hours();
-void decrement_seconds(int rollover);
-void decrement_mins(int rolloever);
-void decrement_hours();
-void modify_time(u32 timeButton);
+// Function prototypes - descriptions are found at the function definition
+static void increment_seconds(int32_t rollover);
+static void increment_mins(int32_t rolloever);
+static void increment_hours();
+static void decrement_seconds(int32_t rollover);
+static void decrement_mins(int32_t rolloever);
+static void decrement_hours();
+static void modify_time(uint32_t timeButton);
 
-static int hours = 0;
-static int mins = 0;
-static int seconds = 0;
+// Global variables
+static int32_t hours = 0;
+static int32_t mins = 0;
+static int32_t seconds = 0;
+static uint32_t currentButtonState;
 
-static int debounceCounter = 0;
-static int inc_dec_hold_counter = 0;
-static u32 currentButtonState;
-// This is invoked in response to a timer interrupt.
-// It does 2 things: 1) debounce switches, and 2) advances the time.
+// This is invoked in response to a timer interrupt every 10 ms.
+// It does 3 things:
+// 1) debounce switches
+// 2) change the time, if the correct buttons are pressed (or held)
+// 3) advances the time, if the user isn't changing the time
 void timer_interrupt_handler() {
-	static int counter = 0;
-	counter++;
+    
+    // counters
+    static int32_t debounceCounter = 0;
+    static int32_t inc_dec_hold_counter = 0;
+	static int32_t counter = 0;
+	
+    // basic timer counter gets advanced every timer interrupt
+    counter++;
 
+    // After the buttons have been debounced, modify the time
+    // if the user is pressing the correct buttons
 	if (debounceCounter && (--debounceCounter == 0)) {
 		modify_time(currentButtonState);
 	}
+    
+    // The variable inc_dec_hold_counter keeps track of how long the user
+    //   has held down a combination of modify time buttons.
+    // After the user has held them down for one second, modify the time and
+    //   reset the counter to half of a second, so the user only waits every
+    //   half a second for the time to be modified
+    // Reset the hold counter when the user lets go of the
+    //   increment and decrement buttons
+    // Don't update the time if the user is modifying the time
 	if (currentButtonState & (SECONDS_BUTTON | MINS_BUTTON | HOURS_BUTTON)) {
 		if (currentButtonState & (INCREMENT_BUTTON | DECREMENT_BUTTON)) {
 			inc_dec_hold_counter++;
 			if (inc_dec_hold_counter >= ONE_SECOND_COUNT) {
-				// update time
 				modify_time(currentButtonState);
 				inc_dec_hold_counter = HALF_SECOND_COUNT;
 			}
-		}else{
+		} else {
 			inc_dec_hold_counter = 0;
 		}
-	} else if (counter == ONE_SECOND_COUNT) {
+	} else if (counter >= ONE_SECOND_COUNT) {
 		increment_seconds(1);
 		PRINT_TIME;
 		counter = 0;
 	}
 }
 
-void modify_time(u32 timeButton) {
+// Modify the displayed time per the specs:
+//   - when the user holds the hours, minutes, or seconds button and
+//     presses the increment or decrement button, increment or decrement
+//     whichever one(s) were being held
+//   - we give precendence to increment if both increment and decrement
+//     buttons are pressed at the same time
+// timeButton is the value of the buttons, where 1 is pressed and 0 is not
+// Increment or decrement the seconds, minutes, or hours WITHOUT 
+//   rolling over into the next time, e.g. when seconds goes from 59 to 0,
+//   don't increment minutes
+static void modify_time(uint32_t timeButton) {
 	if (timeButton & SECONDS_BUTTON) {
 		if (INCREMENT(timeButton)) {
 			increment_seconds(0);
@@ -92,7 +130,9 @@ void modify_time(u32 timeButton) {
 	}
 }
 
-void test() {
+// Our own test function to be called after debouncing the buttons
+// Print which buttons were pressed
+static void test() {
 	if (currentButtonState & (SECONDS_BUTTON)) {
 		xil_printf("seconds\n\r");
 	}
@@ -109,7 +149,10 @@ void test() {
 		xil_printf("decrement\n\r");
 	}
 }
-void increment_seconds(int rollover) {
+
+// Increment the seconds. If rollover is true,
+// increment minutes when seconds goes from 59 to 0.
+static void increment_seconds(int32_t rollover) {
 	seconds++;
 	if (seconds > MINS_SECONDS_MAX) {
 		seconds = 0;
@@ -120,7 +163,8 @@ void increment_seconds(int rollover) {
 
 }
 
-void increment_mins(int rollover) {
+// Works the same as the increment_seconds function, but for minutes
+void increment_mins(int32_t rollover) {
 	mins++;
 	if (mins > MINS_SECONDS_MAX) {
 		mins = 0;
@@ -129,6 +173,8 @@ void increment_mins(int rollover) {
 		}
 	}
 }
+
+// Increment the hours. Rollover doesn't affect minutes or seconds.
 void increment_hours() {
 	hours++;
 	if (hours > HOURS_MAX) {
@@ -136,7 +182,8 @@ void increment_hours() {
 	}
 }
 
-void decrement_seconds(int rollover) {
+// Same as increment_seconds, but decrements instead of increments
+void decrement_seconds(int32_t rollover) {
 	seconds--;
 	if (seconds < 0) {
 		seconds = MINS_SECONDS_MAX;
@@ -147,7 +194,8 @@ void decrement_seconds(int rollover) {
 
 }
 
-void decrement_mins(int rollover) {
+// Same as increment_mins, but decrements instead of increments
+void decrement_mins(int32_t rollover) {
 	mins--;
 	if (mins < 0) {
 		mins = MINS_SECONDS_MAX;
@@ -156,12 +204,15 @@ void decrement_mins(int rollover) {
 		}
 	}
 }
+
+// Same as increment_hours, but decrements instead of increments
 void decrement_hours() {
 	hours--;
 	if (hours < 0) {
 		hours = HOURS_MAX;
 	}
 }
+
 // This is invoked each time there is a change in the button state (result of a push or a bounce).
 void pb_interrupt_handler() {
 	// Clear the GPIO interrupt.
@@ -175,13 +226,16 @@ void pb_interrupt_handler() {
 }
 
 // Main interrupt handler, queries the interrupt controller to see what peripheral
-// fired the interrupt and then dispatches the corresponding interrupt handler.
+//   fired the interrupt and then dispatches the corresponding interrupt handler.
 // This routine acks the interrupt at the controller level but the peripheral
-// interrupt must be ack'd by the dispatched interrupt handler.
-// Question: Why is the timer_interrupt_handler() called after ack'ing the interrupt controller
-// but pb_interrupt_handler() is called before ack'ing the interrupt controller?
+//   interrupt must be ack'd by the dispatched interrupt handler.
+// The timer_interrupt_handler() is called after ack'ing the interrupt controller
+// pb_interrupt_handler() is called before ack'ing the interrupt controller because
+//   the interrupt handler acks the interrupt in the gpio block, which must happen
+//   before acking the interrupt in the interrupt controller, or else the interrupt
+//   will be re-asserted by the gpio block.
 void interrupt_handler_dispatcher(void* ptr) {
-	int intc_status = XIntc_GetIntrStatus(XPAR_INTC_0_BASEADDR);
+	int32_t intc_status = XIntc_GetIntrStatus(XPAR_INTC_0_BASEADDR);
 	// Check the FIT interrupt first.
 	if (intc_status & XPAR_FIT_TIMER_0_INTERRUPT_MASK) {
 		XIntc_AckIntr(XPAR_INTC_0_BASEADDR, XPAR_FIT_TIMER_0_INTERRUPT_MASK);
@@ -194,10 +248,10 @@ void interrupt_handler_dispatcher(void* ptr) {
 	}
 }
 
-int main(void) {
+int32_t main(void) {
 	init_platform();
 	// Initialize the GPIO peripherals.
-	int success;
+	int32_t success;
 	print("hello world\n\r");
 	success = XGpio_Initialize(&gpPB, XPAR_PUSH_BUTTONS_5BITS_DEVICE_ID);
 	// Set the push button peripheral to be inputs.
