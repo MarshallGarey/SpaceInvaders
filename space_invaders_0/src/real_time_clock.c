@@ -43,6 +43,7 @@ static int32_t hours = 0;
 static int32_t mins = 0;
 static int32_t seconds = 0;
 static uint32_t currentButtonState;
+static int32_t debounceCounter = 0;
 
 // This is invoked in response to a timer interrupt every 10 ms.
 // It does 3 things:
@@ -52,7 +53,6 @@ static uint32_t currentButtonState;
 void timer_interrupt_handler() {
     
     // counters
-    static int32_t debounceCounter = 0;
     static int32_t inc_dec_hold_counter = 0;
 	static int32_t counter = 0;
 	
