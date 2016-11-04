@@ -8,6 +8,9 @@
 #include "xparameters.h"
 #include "xil_io.h"
 
+// So the PIT doesn't interrupt too often.
+#define PIT_MINIMUM_DELAY 50000
+
 #define CTRL_RUN_BIT 0x01
 #define CTRL_INTERRUPT_BIT 0x02
 #define CTRL_RELOAD_BIT 0x04
@@ -36,6 +39,9 @@ void pitDisableInterrupt() {
 }
 
 void pitSetDelay(uint32_t delay) {
+	if (delay < PIT_MINIMUM_DELAY) {
+		delay = PIT_MINIMUM_DELAY;
+	}
 	Xil_Out32(DELAY_REG_ADDR, delay);
 }
 

@@ -6,6 +6,7 @@
 #include "mb_interface.h"       // provides the microblaze interrupt enables, etc.
 #include "xintc_l.h"            // Provides handy macros for the interrupt controller.
 #include <stdint.h>
+#include <string.h>
 #include "pit.h"
 
 // Timing/clock constants
@@ -24,6 +25,7 @@
 // We got tired of typing these, and it makes our code more readable
 // \r in PRINT_TIME ensures that we overwrite the old time
 #define PRINT_TIME 	xil_printf("%02d:%02d:%02d\r",hours,mins,seconds)
+//#define PRINT_TIME 	xil_printf("")
 #define INCREMENT(buttonState) (buttonState & INCREMENT_BUTTON)
 #define DECREMENT(buttonState) (buttonState & DECREMENT_BUTTON)
 
@@ -38,6 +40,8 @@ static void decrement_seconds(int32_t rollover);
 static void decrement_mins(int32_t rolloever);
 static void decrement_hours();
 static void modify_time(uint32_t timeButton);
+static int32_t isDigit(char c);
+static uint32_t pow(uint32_t base, int32_t exp);
 
 // Global variables
 static int32_t hours = 0;
@@ -278,10 +282,73 @@ int main(void) {
 	pitInit(PIT_INITIAL_DELAY);
 	pitStart();
 
-	while (1)
-		; // Program never ends.
+#define MAX_STRING_SIZE 80
+	while (1) {
+		char str[MAX_STRING_SIZE];
+		memset(str,0,sizeof(str));
+		int i = 0;
+
+		// Get input until they press enter
+		while (i < MAX_STRING_SIZE) {
+			str[i] = getchar();
+//			xil_printf("%c", str[i]);
+			if (str[i] == '\r') {
+				break;
+			}
+			i++;
+		}
+
+		uint32_t delayNumber = 0;
+		uint32_t length = strlen(str);
+		for (i = length - 2; i >= 0; i--) {
+			uint32_t ch = str[i];
+			if (ch == '\r') {
+				break;
+			}
+			if (!isDigit(ch)) {
+				xil_printf("You suck at numb3r5!\n\r");
+				delayNumber = 0;
+				break;
+			}
+//			xil_printf("character:%c ", ch);
+			ch -= '0';
+//			xil_printf("number:%d ", ch);
+			delayNumber += ch * pow(10, length - i - 2);
+//			xil_printf("delay number: %d\n\r", delayNumber);
+		}
+//		xil_printf("\n\ryou typed %s\n\r", str);
+		xil_printf("%d\n\r", delayNumber);
+		pitSetDelay(delayNumber);
+	}
 
 	cleanup_platform();
 
 	return 0;
 }
+
+// We use this to validate the user's input
+static int32_t isDigit(char c) {
+	if (c < '0' || c > '9') {
+		return 0;
+	}
+	return 1;
+}
+
+static uint32_t pow(uint32_t base, int32_t exp) {
+	uint32_t i;
+	uint32_t result = 1;
+	for (i = 0; i < exp; i++) {
+		result *= base;
+	}
+	return result;
+}
+
+//if (!isDigit(d10pos))
+//	return -1;
+//if (!isDigit(d1pos)) {
+//	return d10pos - '0';
+//} else {
+//	d10pos -= '0';
+//	d1pos -= '0';
+//	return (d10pos * 10) + d1pos;
+//}
