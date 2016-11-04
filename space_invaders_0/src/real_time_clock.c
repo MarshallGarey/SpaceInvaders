@@ -5,6 +5,8 @@
 #include "platform.h"           // Enables caching and other system stuff.
 #include "mb_interface.h"       // provides the microblaze interrupt enables, etc.
 #include "xintc_l.h"            // Provides handy macros for the interrupt controller.
+#include <stdint.h>
+#include "pit.h"
 
 // Timing/clock constants
 #define ONE_SECOND_COUNT 100    // timer ticks in one second
@@ -12,7 +14,6 @@
 #define DEBOUNCE_TIME 5         // timer ticks to wait for button to be stable
 #define MINS_SECONDS_MAX 59     // obviously...
 #define HOURS_MAX 23            // we use 24-hour (military) time
-
 // Bit masks
 #define SECONDS_BUTTON 0x02
 #define MINS_BUTTON 0x01
@@ -26,8 +27,8 @@
 #define INCREMENT(buttonState) (buttonState & INCREMENT_BUTTON)
 #define DECREMENT(buttonState) (buttonState & DECREMENT_BUTTON)
 
-static XGpio gpLED;             // This is a handle for the LED GPIO block.
-static XGpio gpPB;              // This is a handle for the push-button GPIO block.
+static XGpio gpLED; // This is a handle for the LED GPIO block.
+static XGpio gpPB; // This is a handle for the push-button GPIO block.
 
 // Function prototypes - descriptions are found at the function definition
 static void increment_seconds(int32_t rollover);
@@ -51,28 +52,28 @@ static int32_t debounceCounter = 0;
 // 2) change the time, if the correct buttons are pressed (or held)
 // 3) advances the time, if the user isn't changing the time
 void timer_interrupt_handler() {
-    
-    // counters
-    static int32_t inc_dec_hold_counter = 0;
-	static int32_t counter = 0;
-	
-    // basic timer counter gets advanced every timer interrupt
-    counter++;
 
-    // After the buttons have been debounced, modify the time
-    // if the user is pressing the correct buttons
+	// counters
+	static int32_t inc_dec_hold_counter = 0;
+	static int32_t counter = 0;
+
+	// basic timer counter gets advanced every timer interrupt
+	counter++;
+
+	// After the buttons have been debounced, modify the time
+	// if the user is pressing the correct buttons
 	if (debounceCounter && (--debounceCounter == 0)) {
 		modify_time(currentButtonState);
 	}
-    
-    // The variable inc_dec_hold_counter keeps track of how long the user
-    //   has held down a combination of modify time buttons.
-    // After the user has held them down for one second, modify the time and
-    //   reset the counter to half of a second, so the user only waits every
-    //   half a second for the time to be modified
-    // Reset the hold counter when the user lets go of the
-    //   increment and decrement buttons
-    // Don't update the time if the user is modifying the time
+
+	// The variable inc_dec_hold_counter keeps track of how long the user
+	//   has held down a combination of modify time buttons.
+	// After the user has held them down for one second, modify the time and
+	//   reset the counter to half of a second, so the user only waits every
+	//   half a second for the time to be modified
+	// Reset the hold counter when the user lets go of the
+	//   increment and decrement buttons
+	// Don't update the time if the user is modifying the time
 	if (currentButtonState & (SECONDS_BUTTON | MINS_BUTTON | HOURS_BUTTON)) {
 		if (currentButtonState & (INCREMENT_BUTTON | DECREMENT_BUTTON)) {
 			inc_dec_hold_counter++;
@@ -236,9 +237,10 @@ void pb_interrupt_handler() {
 //   will be re-asserted by the gpio block.
 void interrupt_handler_dispatcher(void* ptr) {
 	int32_t intc_status = XIntc_GetIntrStatus(XPAR_INTC_0_BASEADDR);
+//	xil_printf("interrupt received: 0x%x\n\r", intc_status);
 	// Check the FIT interrupt first.
-	if (intc_status & XPAR_FIT_TIMER_0_INTERRUPT_MASK) {
-		XIntc_AckIntr(XPAR_INTC_0_BASEADDR, XPAR_FIT_TIMER_0_INTERRUPT_MASK);
+	if (intc_status & XPAR_PIT_0_PIT_INTR_MASK) {
+		XIntc_AckIntr(XPAR_INTC_0_BASEADDR, XPAR_PIT_0_PIT_INTR_MASK);
 		timer_interrupt_handler();
 	}
 	// Check the push buttons.
@@ -248,7 +250,7 @@ void interrupt_handler_dispatcher(void* ptr) {
 	}
 }
 
-int32_t main(void) {
+int main(void) {
 	init_platform();
 	// Initialize the GPIO peripherals.
 	int32_t success;
@@ -262,10 +264,19 @@ int32_t main(void) {
 	XGpio_InterruptEnable(&gpPB, 0xFFFFFFFF);
 
 	microblaze_register_handler(interrupt_handler_dispatcher, NULL);
+
+	//	XIntc_EnableIntr(XPAR_INTC_0_BASEADDR,
+	//			(XPAR_FIT_TIMER_0_INTERRUPT_MASK |
+	//					XPAR_PUSH_BUTTONS_5BITS_IP2INTC_IRPT_MASK));
+
 	XIntc_EnableIntr(XPAR_INTC_0_BASEADDR,
-			(XPAR_FIT_TIMER_0_INTERRUPT_MASK | XPAR_PUSH_BUTTONS_5BITS_IP2INTC_IRPT_MASK));
+			(XPAR_PIT_0_PIT_INTR_MASK | XPAR_PUSH_BUTTONS_5BITS_IP2INTC_IRPT_MASK));
+
 	XIntc_MasterEnable(XPAR_INTC_0_BASEADDR);
 	microblaze_enable_interrupts();
+
+	pitInit(PIT_INITIAL_DELAY);
+	pitStart();
 
 	while (1)
 		; // Program never ends.

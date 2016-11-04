@@ -1,0 +1,23 @@
+/*
+ * pit.c
+ *
+ *  Created on: Nov 3, 2016
+ *      Author: superman
+ */
+#include "pit.h"
+#include "xparameters.h"
+
+static void setControlRegister() {
+
+}
+
+void pitEnableInterrupt() {
+	Xil_Out32();
+}
+
+void pitDisableInterrupt();
+void pitSetDelay(uint32_t delay);
+void pitStart();
+void pitStop();
+void pitReloadEnable();
+void pitReloadDisable();

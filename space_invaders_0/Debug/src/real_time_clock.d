@@ -10,7 +10,8 @@ src/real_time_clock.d src/real_time_clock.o: ../src/real_time_clock.c \
   ../src/platform.h ../src/platform_config.h \
   ../../space_invaders_bsp_0/microblaze_0/include/mb_interface.h \
   ../../space_invaders_bsp_0/microblaze_0/include/xintc_l.h \
-  ../../space_invaders_bsp_0/microblaze_0/include/xparameters.h
+  ../../space_invaders_bsp_0/microblaze_0/include/xparameters.h \
+  ../src/pit.h
 
 ../../space_invaders_bsp_0/microblaze_0/include/xgpio.h:
 
@@ -37,3 +38,5 @@ src/real_time_clock.d src/real_time_clock.o: ../src/real_time_clock.c \
 ../../space_invaders_bsp_0/microblaze_0/include/xintc_l.h:
 
 ../../space_invaders_bsp_0/microblaze_0/include/xparameters.h:
+
+../src/pit.h:

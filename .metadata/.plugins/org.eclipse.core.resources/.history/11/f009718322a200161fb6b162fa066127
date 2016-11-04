@@ -1,0 +1,29 @@
+/*
+ * pit.c
+ *
+ *  Created on: Nov 3, 2016
+ *      Author: superman
+ */
+#include "pit.h"
+#include "xparameters.h"
+#include "xil_io.h"
+
+#define CTRL_RUN_BIT 0x01
+#define CTRL_INTERRUPT_BIT 0x02
+#define CTRL_RELOAD_BIT 0x04
+
+void pitEnableInterrupt() {
+
+}
+
+void pitDisableInterrupt();
+
+void pitSetDelay(uint32_t delay) {
+	uint32_t controlReg = Xil_In32(XPAR_PIT_0_BASEADDR);
+	Xil_Out32(XPAR_PIT_0_BASEADDR, controlReg | )
+}
+
+void pitStart();
+void pitStop();
+void pitReloadEnable();
+void pitReloadDisable();
