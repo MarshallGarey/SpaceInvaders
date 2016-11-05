@@ -159,7 +159,8 @@ begin
 		
 			-- Reset? (low asserted)
 			if Bus2IP_Resetn = '0' then 
-				count <= (others => '1'); 
+				count(20 downto 0) <= (others => '1');
+				count(31 downto 21) <= (others=> '0');
 				delay_reg <= (others => '0'); 
 				ctrl_reg <= (others => '0');
 				intr <= '0'; 

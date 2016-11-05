@@ -8,6 +8,7 @@
 #include <stdint.h>
 #include <string.h>
 #include "pit.h"
+#include "xuartlite.h"
 
 // Timing/clock constants
 #define ONE_SECOND_COUNT 100    // timer ticks in one second
@@ -24,12 +25,11 @@
 
 // We got tired of typing these, and it makes our code more readable
 // \r in PRINT_TIME ensures that we overwrite the old time
-#define PRINT_TIME 	xil_printf("%02d:%02d:%02d\r",hours,mins,seconds)
-//#define PRINT_TIME 	xil_printf("")
+//#define PRINT_TIME 	xil_printf("%02d:%02d:%02d\r",hours,mins,seconds)
+#define PRINT_TIME 	xil_printf("")
 #define INCREMENT(buttonState) (buttonState & INCREMENT_BUTTON)
 #define DECREMENT(buttonState) (buttonState & DECREMENT_BUTTON)
 
-static XGpio gpLED; // This is a handle for the LED GPIO block.
 static XGpio gpPB; // This is a handle for the push-button GPIO block.
 
 // Function prototypes - descriptions are found at the function definition
@@ -41,7 +41,8 @@ static void decrement_mins(int32_t rolloever);
 static void decrement_hours();
 static void modify_time(uint32_t timeButton);
 static int32_t isDigit(char c);
-static uint32_t pow(uint32_t base, int32_t exp);
+static uint32_t power(uint32_t base, int32_t exp);
+void uartEvent();
 
 // Global variables
 static int32_t hours = 0;
@@ -49,6 +50,8 @@ static int32_t mins = 0;
 static int32_t seconds = 0;
 static uint32_t currentButtonState;
 static int32_t debounceCounter = 0;
+
+static XUartLite uart;
 
 // This is invoked in response to a timer interrupt every 10 ms.
 // It does 3 things:
@@ -241,7 +244,7 @@ void pb_interrupt_handler() {
 //   will be re-asserted by the gpio block.
 void interrupt_handler_dispatcher(void* ptr) {
 	int32_t intc_status = XIntc_GetIntrStatus(XPAR_INTC_0_BASEADDR);
-//	xil_printf("interrupt received: 0x%x\n\r", intc_status);
+	//	xil_printf("interrupt received: 0x%x\n\r", intc_status);
 	// Check the FIT interrupt first.
 	if (intc_status & XPAR_PIT_0_PIT_INTR_MASK) {
 		XIntc_AckIntr(XPAR_INTC_0_BASEADDR, XPAR_PIT_0_PIT_INTR_MASK);
@@ -258,7 +261,7 @@ int main(void) {
 	init_platform();
 	// Initialize the GPIO peripherals.
 	int32_t success;
-	print("hello world\n\r");
+	xil_printf("hello world\n\r");
 	success = XGpio_Initialize(&gpPB, XPAR_PUSH_BUTTONS_5BITS_DEVICE_ID);
 	// Set the push button peripheral to be inputs.
 	XGpio_SetDataDirection(&gpPB, 1, 0x0000001F);
@@ -272,7 +275,6 @@ int main(void) {
 	//	XIntc_EnableIntr(XPAR_INTC_0_BASEADDR,
 	//			(XPAR_FIT_TIMER_0_INTERRUPT_MASK |
 	//					XPAR_PUSH_BUTTONS_5BITS_IP2INTC_IRPT_MASK));
-
 	XIntc_EnableIntr(XPAR_INTC_0_BASEADDR,
 			(XPAR_PIT_0_PIT_INTR_MASK | XPAR_PUSH_BUTTONS_5BITS_IP2INTC_IRPT_MASK));
 
@@ -282,43 +284,58 @@ int main(void) {
 	pitInit(PIT_INITIAL_DELAY);
 	pitStart();
 
+	XUartLite_Initialize(&uart, XPAR_UARTLITE_1_DEVICE_ID);
+	XUartLite_ResetFifos(&uart);
+
 #define MAX_STRING_SIZE 80
 	while (1) {
-		char str[MAX_STRING_SIZE];
-		memset(str,0,sizeof(str));
-		int i = 0;
-
-		// Get input until they press enter
-		while (i < MAX_STRING_SIZE) {
-			str[i] = getchar();
-//			xil_printf("%c", str[i]);
-			if (str[i] == '\r') {
-				break;
-			}
-			i++;
-		}
-
-		uint32_t delayNumber = 0;
-		uint32_t length = strlen(str);
-		for (i = length - 2; i >= 0; i--) {
-			uint32_t ch = str[i];
-			if (ch == '\r') {
-				break;
-			}
-			if (!isDigit(ch)) {
-				xil_printf("You suck at numb3r5!\n\r");
-				delayNumber = 0;
-				break;
-			}
-//			xil_printf("character:%c ", ch);
-			ch -= '0';
-//			xil_printf("number:%d ", ch);
-			delayNumber += ch * pow(10, length - i - 2);
-//			xil_printf("delay number: %d\n\r", delayNumber);
-		}
-//		xil_printf("\n\ryou typed %s\n\r", str);
-		xil_printf("%d\n\r", delayNumber);
-		pitSetDelay(delayNumber);
+		uartEvent();
+//		XUartLite_EnableInterrupt(&uart);
+//		XUartLite_Stats stats;
+//		XUartLite_GetStats(&uart, &stats);
+//		xil_printf("receive interrupts: %d\n\r", stats.ReceiveInterrupts);
+//		xil_printf("transmit interrupts: %d\n\r", stats.TransmitInterrupts);
+//		xil_printf("characters received: %d\n\r", stats.CharactersReceived);
+//		xil_printf("characters transmitted %d\n\r", stats.CharactersTransmitted);
+//		char c  = getchar();
+//		xil_printf("char received: %c\n\r", c);
+//		volatile int i = 50000000;
+//		while(i--);
+		//		char str[MAX_STRING_SIZE];
+		//		memset(str,0,sizeof(str));
+		//		int i = 0;
+		//
+		//		// Get input until they press enter
+		//		while (i < MAX_STRING_SIZE) {
+		//			str[i] = getchar();
+		////			xil_printf("%c", str[i]);
+		//			if (str[i] == '\r') {
+		//				break;
+		//			}
+		//			i++;
+		//		}
+		//
+		//		uint32_t delayNumber = 0;
+		//		uint32_t length = strlen(str);
+		//		for (i = length - 2; i >= 0; i--) {
+		//			uint32_t ch = str[i];
+		//			if (ch == '\r') {
+		//				break;
+		//			}
+		//			if (!isDigit(ch)) {
+		//				xil_printf("You suck at numb3r5!\n\r");
+		//				delayNumber = 0;
+		//				break;
+		//			}
+		////			xil_printf("character:%c ", ch);
+		//			ch -= '0';
+		////			xil_printf("number:%d ", ch);
+		//			delayNumber += ch * pow(10, length - i - 2);
+		////			xil_printf("delay number: %d\n\r", delayNumber);
+		//		}
+		////		xil_printf("\n\ryou typed %s\n\r", str);
+		//		xil_printf("%d\n\r", delayNumber);
+		//		pitSetDelay(delayNumber);
 	}
 
 	cleanup_platform();
@@ -334,7 +351,7 @@ static int32_t isDigit(char c) {
 	return 1;
 }
 
-static uint32_t pow(uint32_t base, int32_t exp) {
+static uint32_t power(uint32_t base, int32_t exp) {
 	uint32_t i;
 	uint32_t result = 1;
 	for (i = 0; i < exp; i++) {
@@ -343,12 +360,54 @@ static uint32_t pow(uint32_t base, int32_t exp) {
 	return result;
 }
 
-//if (!isDigit(d10pos))
-//	return -1;
-//if (!isDigit(d1pos)) {
-//	return d10pos - '0';
-//} else {
-//	d10pos -= '0';
-//	d1pos -= '0';
-//	return (d10pos * 10) + d1pos;
-//}
+void uartEvent() {
+
+	static char str[MAX_STRING_SIZE];
+	static int i = 0;
+
+	// Get input until they press enter
+	uint8_t data;
+	uint32_t bytesReceived = XUartLite_Recv(&uart, &data, 1);
+	if (bytesReceived == 0) {
+		return;
+	}
+	else {
+		str[i] = data;
+		xil_printf("received: %c\n\r", str[i]);
+		xil_printf("string so far: %s\n\r", str);
+	}
+
+	if (str[i] == '\r') {
+		int j;
+		i = 0;
+
+		uint32_t delayNumber = 0;
+		uint32_t length = strlen(str);
+//		for(j = length-1; j >= 0; j--){
+//			xil_printf("%c",str[j]);
+//		}
+		for (j = length - 2; j >= 0; j--) {
+			uint32_t ch = str[j];
+			if (ch == '\r') {
+				break;
+			}
+			if (!isDigit(ch)) {
+				xil_printf("You suck at numb3r5!\n\r");
+				delayNumber = 0;
+				break;
+			}
+			xil_printf("\n\rcharacter:%c ", ch);
+			ch -= '0';
+			xil_printf("number:%d ", ch);
+			delayNumber += ch * power(10, length - j - 2);
+			xil_printf("delay number: %d\n\r", delayNumber);
+		}
+		xil_printf("\n\r You typed %s\n\r", str);
+		xil_printf("\n\r Delay number = %d\n\r", delayNumber);
+		pitSetDelay(delayNumber);
+		memset(str, 0, sizeof(str));
+	} else {
+		i++;
+	}
+}
+

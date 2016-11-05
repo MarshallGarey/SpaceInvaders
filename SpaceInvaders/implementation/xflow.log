@@ -7,17 +7,19 @@ PMSPEC -- Overriding Xilinx file
 <C:/Xilinx/13.4/ISE_DS/ISE/spartan6/data/spartan6.acd>
 
 Using Flow File:
-C:/Users/superman/Desktop/SpaceInvaders/SpaceInvaders/implementation/fpga.flw 
+C:/Users/superman/Desktop/cramshall/SpaceInvaders/SpaceInvaders/implementation/f
+pga.flw 
 Using Option File(s): 
- C:/Users/superman/Desktop/SpaceInvaders/SpaceInvaders/implementation/xflow.opt 
+ C:/Users/superman/Desktop/cramshall/SpaceInvaders/SpaceInvaders/implementation/
+xflow.opt 
 
 Creating Script File ... 
 
 #----------------------------------------------#
 # Starting program ngdbuild
 # ngdbuild -p xc6slx45csg324-3 -nt timestamp -bm system.bmm
-"C:/Users/superman/Desktop/SpaceInvaders/SpaceInvaders/implementation/system.ngc
-" -uc system.ucf system.ngd 
+"C:/Users/superman/Desktop/cramshall/SpaceInvaders/SpaceInvaders/implementation/
+system.ngc" -uc system.ucf system.ngd 
 #----------------------------------------------#
 Release 13.4 - ngdbuild O.87xd (nt64)
 Copyright (c) 1995-2011 Xilinx, Inc.  All rights reserved.
@@ -27,78 +29,78 @@ PMSPEC -- Overriding Xilinx file
 
 Command Line: C:\Xilinx\13.4\ISE_DS\ISE\bin\nt64\unwrapped\ngdbuild.exe -p
 xc6slx45csg324-3 -nt timestamp -bm system.bmm
-C:/Users/superman/Desktop/SpaceInvaders/SpaceInvaders/implementation/system.ngc
--uc system.ucf system.ngd
+C:/Users/superman/Desktop/cramshall/SpaceInvaders/SpaceInvaders/implementation/s
+ystem.ngc -uc system.ucf system.ngd
 
 Reading NGO file
-"C:/Users/superman/Desktop/SpaceInvaders/SpaceInvaders/implementation/system.ngc
-" ...
+"C:/Users/superman/Desktop/cramshall/SpaceInvaders/SpaceInvaders/implementation/
+system.ngc" ...
 Loading design module
-"C:/Users/superman/Desktop/SpaceInvaders/SpaceInvaders/implementation/push_butto
-ns_5bits_wrapper.ngc"...
+"C:/Users/superman/Desktop/cramshall/SpaceInvaders/SpaceInvaders/implementation/
+push_buttons_5bits_wrapper.ngc"...
 Loading design module
-"C:/Users/superman/Desktop/SpaceInvaders/SpaceInvaders/implementation/dip_switch
-es_8bits_wrapper.ngc"...
+"C:/Users/superman/Desktop/cramshall/SpaceInvaders/SpaceInvaders/implementation/
+dip_switches_8bits_wrapper.ngc"...
 Loading design module
-"C:/Users/superman/Desktop/SpaceInvaders/SpaceInvaders/implementation/rs232_uart
-_1_wrapper.ngc"...
+"C:/Users/superman/Desktop/cramshall/SpaceInvaders/SpaceInvaders/implementation/
+rs232_uart_1_wrapper.ngc"...
 Loading design module
-"C:/Users/superman/Desktop/SpaceInvaders/SpaceInvaders/implementation/proc_sys_r
-eset_0_wrapper.ngc"...
+"C:/Users/superman/Desktop/cramshall/SpaceInvaders/SpaceInvaders/implementation/
+proc_sys_reset_0_wrapper.ngc"...
 Loading design module
-"C:/Users/superman/Desktop/SpaceInvaders/SpaceInvaders/implementation/clock_gene
-rator_0_wrapper.ngc"...
+"C:/Users/superman/Desktop/cramshall/SpaceInvaders/SpaceInvaders/implementation/
+clock_generator_0_wrapper.ngc"...
 Loading design module
-"C:/Users/superman/Desktop/SpaceInvaders/SpaceInvaders/implementation/microblaze
-_0_ilmb_wrapper.ngc"...
+"C:/Users/superman/Desktop/cramshall/SpaceInvaders/SpaceInvaders/implementation/
+microblaze_0_ilmb_wrapper.ngc"...
 Loading design module
-"C:/Users/superman/Desktop/SpaceInvaders/SpaceInvaders/implementation/microblaze
-_0_dlmb_wrapper.ngc"...
+"C:/Users/superman/Desktop/cramshall/SpaceInvaders/SpaceInvaders/implementation/
+microblaze_0_dlmb_wrapper.ngc"...
 Loading design module
-"C:/Users/superman/Desktop/SpaceInvaders/SpaceInvaders/implementation/axi4lite_0
-_wrapper.ngc"...
+"C:/Users/superman/Desktop/cramshall/SpaceInvaders/SpaceInvaders/implementation/
+axi4lite_0_wrapper.ngc"...
 Loading design module
-"C:/Users/superman/Desktop/SpaceInvaders/SpaceInvaders/implementation/microblaze
-_0_wrapper.ngc"...
+"C:/Users/superman/Desktop/cramshall/SpaceInvaders/SpaceInvaders/implementation/
+microblaze_0_wrapper.ngc"...
 Loading design module
-"C:/Users/superman/Desktop/SpaceInvaders/SpaceInvaders/implementation/microblaze
-_0_intc_wrapper.ngc"...
+"C:/Users/superman/Desktop/cramshall/SpaceInvaders/SpaceInvaders/implementation/
+microblaze_0_intc_wrapper.ngc"...
 Loading design module
-"C:/Users/superman/Desktop/SpaceInvaders/SpaceInvaders/implementation/microblaze
-_0_i_bram_ctrl_wrapper.ngc"...
+"C:/Users/superman/Desktop/cramshall/SpaceInvaders/SpaceInvaders/implementation/
+microblaze_0_i_bram_ctrl_wrapper.ngc"...
 Loading design module
-"C:/Users/superman/Desktop/SpaceInvaders/SpaceInvaders/implementation/microblaze
-_0_d_bram_ctrl_wrapper.ngc"...
+"C:/Users/superman/Desktop/cramshall/SpaceInvaders/SpaceInvaders/implementation/
+microblaze_0_d_bram_ctrl_wrapper.ngc"...
 Loading design module
-"C:/Users/superman/Desktop/SpaceInvaders/SpaceInvaders/implementation/debug_modu
-le_wrapper.ngc"...
+"C:/Users/superman/Desktop/cramshall/SpaceInvaders/SpaceInvaders/implementation/
+debug_module_wrapper.ngc"...
 Loading design module
-"C:/Users/superman/Desktop/SpaceInvaders/SpaceInvaders/implementation/leds_8bits
-_wrapper.ngc"...
+"C:/Users/superman/Desktop/cramshall/SpaceInvaders/SpaceInvaders/implementation/
+leds_8bits_wrapper.ngc"...
 Loading design module
-"C:/Users/superman/Desktop/SpaceInvaders/SpaceInvaders/implementation/fit_timer_
-0_wrapper.ngc"...
+"C:/Users/superman/Desktop/cramshall/SpaceInvaders/SpaceInvaders/implementation/
+fit_timer_0_wrapper.ngc"...
 Loading design module
-"C:/Users/superman/Desktop/SpaceInvaders/SpaceInvaders/implementation/pit_0_wrap
-per.ngc"...
+"C:/Users/superman/Desktop/cramshall/SpaceInvaders/SpaceInvaders/implementation/
+pit_0_wrapper.ngc"...
 Loading design module
-"C:/Users/superman/Desktop/SpaceInvaders/SpaceInvaders/implementation/microblaze
-_0_bram_block_wrapper.ngc"...
+"C:/Users/superman/Desktop/cramshall/SpaceInvaders/SpaceInvaders/implementation/
+microblaze_0_bram_block_wrapper.ngc"...
 Applying constraints in
-"C:/Users/superman/Desktop/SpaceInvaders/SpaceInvaders/implementation/microblaze
-_0_ilmb_wrapper.ncf" to module "microblaze_0_ilmb"...
+"C:/Users/superman/Desktop/cramshall/SpaceInvaders/SpaceInvaders/implementation/
+microblaze_0_ilmb_wrapper.ncf" to module "microblaze_0_ilmb"...
 Checking Constraint Associations...
 Applying constraints in
-"C:/Users/superman/Desktop/SpaceInvaders/SpaceInvaders/implementation/microblaze
-_0_dlmb_wrapper.ncf" to module "microblaze_0_dlmb"...
+"C:/Users/superman/Desktop/cramshall/SpaceInvaders/SpaceInvaders/implementation/
+microblaze_0_dlmb_wrapper.ncf" to module "microblaze_0_dlmb"...
 Checking Constraint Associations...
 Applying constraints in
-"C:/Users/superman/Desktop/SpaceInvaders/SpaceInvaders/implementation/axi4lite_0
-_wrapper.ncf" to module "axi4lite_0"...
+"C:/Users/superman/Desktop/cramshall/SpaceInvaders/SpaceInvaders/implementation/
+axi4lite_0_wrapper.ncf" to module "axi4lite_0"...
 Checking Constraint Associations...
 Applying constraints in
-"C:/Users/superman/Desktop/SpaceInvaders/SpaceInvaders/implementation/microblaze
-_0_wrapper.ncf" to module "microblaze_0"...
+"C:/Users/superman/Desktop/cramshall/SpaceInvaders/SpaceInvaders/implementation/
+microblaze_0_wrapper.ncf" to module "microblaze_0"...
 Checking Constraint Associations...
 Gathering constraint information from source properties...
 Done.
@@ -193,11 +195,11 @@ Updating timing models...
 INFO:Map:215 - The Interim Design Summary has been generated in the MAP Report
    (.mrp).
 Running timing-driven placement...
-Total REAL time at the beginning of Placer: 10 secs 
+Total REAL time at the beginning of Placer: 8 secs 
 Total CPU  time at the beginning of Placer: 8 secs 
 
 Phase 1.1  Initial Placement Analysis
-Phase 1.1  Initial Placement Analysis (Checksum:bb56e98d) REAL time: 12 secs 
+Phase 1.1  Initial Placement Analysis (Checksum:bb56e98d) REAL time: 9 secs 
 
 Phase 2.7  Design Feasibility Check
 WARNING:Place:838 - An IO Bus with more than one IO standard is found.
@@ -212,49 +214,49 @@ WARNING:Place:838 - An IO Bus with more than one IO standard is found.
    	 Comp: DIP_Switches_8Bits_TRI_I<7>   IOSTANDARD = LVCMOS18
 
 
-Phase 2.7  Design Feasibility Check (Checksum:bb56e98d) REAL time: 12 secs 
+Phase 2.7  Design Feasibility Check (Checksum:bb56e98d) REAL time: 9 secs 
 
 Phase 3.31  Local Placement Optimization
-Phase 3.31  Local Placement Optimization (Checksum:649b5add) REAL time: 12 secs 
+Phase 3.31  Local Placement Optimization (Checksum:86f70cad) REAL time: 9 secs 
 
 Phase 4.2  Initial Placement for Architecture Specific Features
 
 Phase 4.2  Initial Placement for Architecture Specific Features
-(Checksum:ccfb7aa1) REAL time: 23 secs 
+(Checksum:52d4abab) REAL time: 20 secs 
 
 Phase 5.36  Local Placement Optimization
-Phase 5.36  Local Placement Optimization (Checksum:ccfb7aa1) REAL time: 23 secs 
+Phase 5.36  Local Placement Optimization (Checksum:52d4abab) REAL time: 20 secs 
 
 Phase 6.30  Global Clock Region Assignment
-Phase 6.30  Global Clock Region Assignment (Checksum:ccfb7aa1) REAL time: 23 secs 
+Phase 6.30  Global Clock Region Assignment (Checksum:52d4abab) REAL time: 20 secs 
 
 Phase 7.3  Local Placement Optimization
-Phase 7.3  Local Placement Optimization (Checksum:ccfb7aa1) REAL time: 24 secs 
+Phase 7.3  Local Placement Optimization (Checksum:52d4abab) REAL time: 20 secs 
 
 Phase 8.5  Local Placement Optimization
-Phase 8.5  Local Placement Optimization (Checksum:ccfb7aa1) REAL time: 24 secs 
+Phase 8.5  Local Placement Optimization (Checksum:52d4abab) REAL time: 20 secs 
 
 Phase 9.8  Global Placement
-...........................................................
-............................................................................................................................................................................
-.......................................
-......................
-Phase 9.8  Global Placement (Checksum:60902d3d) REAL time: 38 secs 
+............................................................
+.......................................................................................................................................
+.............................................................................................................................
+............................................
+Phase 9.8  Global Placement (Checksum:3fc690bb) REAL time: 32 secs 
 
 Phase 10.5  Local Placement Optimization
-Phase 10.5  Local Placement Optimization (Checksum:60902d3d) REAL time: 39 secs 
+Phase 10.5  Local Placement Optimization (Checksum:3fc690bb) REAL time: 33 secs 
 
 Phase 11.18  Placement Optimization
-Phase 11.18  Placement Optimization (Checksum:a8416739) REAL time: 43 secs 
+Phase 11.18  Placement Optimization (Checksum:ed0635d0) REAL time: 37 secs 
 
 Phase 12.5  Local Placement Optimization
-Phase 12.5  Local Placement Optimization (Checksum:a8416739) REAL time: 43 secs 
+Phase 12.5  Local Placement Optimization (Checksum:ed0635d0) REAL time: 37 secs 
 
 Phase 13.34  Placement Validation
-Phase 13.34  Placement Validation (Checksum:af300624) REAL time: 43 secs 
+Phase 13.34  Placement Validation (Checksum:8ffafdbf) REAL time: 37 secs 
 
-Total REAL time to Placer completion: 46 secs 
-Total CPU  time to Placer completion: 43 secs 
+Total REAL time to Placer completion: 40 secs 
+Total CPU  time to Placer completion: 40 secs 
 Running post-placement packing...
 Writing output files...
 
@@ -289,12 +291,12 @@ Slice Logic Utilization:
       Number with other load:                    0
 
 Slice Logic Distribution:
-  Number of occupied Slices:                   996 out of   6,822   14%
+  Number of occupied Slices:                 1,029 out of   6,822   15%
   Nummber of MUXCYs used:                      268 out of  13,644    1%
-  Number of LUT Flip Flop pairs used:        2,818
-    Number with an unused Flip Flop:         1,076 out of   2,818   38%
-    Number with an unused LUT:                 420 out of   2,818   14%
-    Number of fully used LUT-FF pairs:       1,322 out of   2,818   46%
+  Number of LUT Flip Flop pairs used:        2,832
+    Number with an unused Flip Flop:         1,090 out of   2,832   38%
+    Number with an unused LUT:                 434 out of   2,832   15%
+    Number of fully used LUT-FF pairs:       1,308 out of   2,832   46%
     Number of unique control sets:             162
     Number of slice register sites lost
       to control set restrictions:             681 out of  54,576    1%
@@ -343,9 +345,9 @@ Specific Feature Utilization:
 
 Average Fanout of Non-Clock Nets:                4.19
 
-Peak Memory Usage:  522 MB
-Total REAL time to MAP completion:  48 secs 
-Total CPU time to MAP completion:   45 secs 
+Peak Memory Usage:  540 MB
+Total REAL time to MAP completion:  42 secs 
+Total CPU time to MAP completion:   42 secs 
 
 Mapping completed.
 See MAP report file "system_map.mrp" for details.
@@ -419,12 +421,12 @@ Slice Logic Utilization:
       Number with other load:                    0
 
 Slice Logic Distribution:
-  Number of occupied Slices:                   996 out of   6,822   14%
+  Number of occupied Slices:                 1,029 out of   6,822   15%
   Nummber of MUXCYs used:                      268 out of  13,644    1%
-  Number of LUT Flip Flop pairs used:        2,818
-    Number with an unused Flip Flop:         1,076 out of   2,818   38%
-    Number with an unused LUT:                 420 out of   2,818   14%
-    Number of fully used LUT-FF pairs:       1,322 out of   2,818   46%
+  Number of LUT Flip Flop pairs used:        2,832
+    Number with an unused Flip Flop:         1,090 out of   2,832   38%
+    Number with an unused LUT:                 434 out of   2,832   15%
+    Number of fully used LUT-FF pairs:       1,308 out of   2,832   46%
     Number of slice register sites lost
       to control set restrictions:               0 out of  54,576    0%
 
@@ -477,85 +479,85 @@ Router effort level (-rl):    High
 INFO:Timing:3386 - Intersecting Constraints found and resolved.  For more information, see the TSI report.  Please consult the Xilinx
    Command Line Tools User Guide for information on generating a TSI report.
 Starting initial Timing Analysis.  REAL time: 6 secs 
-Finished initial Timing Analysis.  REAL time: 6 secs 
+Finished initial Timing Analysis.  REAL time: 7 secs 
 
 WARNING:Par:288 - The signal
-   microblaze_0/microblaze_0/MicroBlaze_Core_I/Performance.Data_Flow_I/Register_File_I/Using_LUT6.All_RAM32M[11].ram32m_i_RAMD_D1_O has no
-   load.  PAR will not attempt to route this signal.
-WARNING:Par:288 - The signal
-   microblaze_0/microblaze_0/MicroBlaze_Core_I/Performance.Data_Flow_I/Register_File_I/Using_LUT6.All_RAM32M[2].ram32m_i_RAMD_D1_O has no
+   microblaze_0/microblaze_0/MicroBlaze_Core_I/Performance.Data_Flow_I/Register_File_I/Using_LUT6.All_RAM32M[6].ram32m_i_RAMD_D1_O has no
    load.  PAR will not attempt to route this signal.
 WARNING:Par:288 - The signal
    microblaze_0/microblaze_0/MicroBlaze_Core_I/Performance.Data_Flow_I/Register_File_I/Using_LUT6.All_RAM32M[1].ram32m_i_RAMD_D1_O has no
    load.  PAR will not attempt to route this signal.
 WARNING:Par:288 - The signal
-   microblaze_0/microblaze_0/MicroBlaze_Core_I/Performance.Data_Flow_I/Register_File_I/Using_LUT6.All_RAM32M[12].ram32m_i_RAMD_D1_O has no
-   load.  PAR will not attempt to route this signal.
-WARNING:Par:288 - The signal
-   microblaze_0/microblaze_0/MicroBlaze_Core_I/Performance.Data_Flow_I/Register_File_I/Using_LUT6.All_RAM32M[3].ram32m_i_RAMD_D1_O has no
-   load.  PAR will not attempt to route this signal.
-WARNING:Par:288 - The signal
    microblaze_0/microblaze_0/MicroBlaze_Core_I/Performance.Data_Flow_I/Register_File_I/Using_LUT6.All_RAM32M[0].ram32m_i_RAMD_D1_O has no
-   load.  PAR will not attempt to route this signal.
-WARNING:Par:288 - The signal
-   microblaze_0/microblaze_0/MicroBlaze_Core_I/Performance.Data_Flow_I/Register_File_I/Using_LUT6.All_RAM32M[4].ram32m_i_RAMD_D1_O has no
-   load.  PAR will not attempt to route this signal.
-WARNING:Par:288 - The signal
-   microblaze_0/microblaze_0/MicroBlaze_Core_I/Performance.Data_Flow_I/Register_File_I/Using_LUT6.All_RAM32M[14].ram32m_i_RAMD_D1_O has no
    load.  PAR will not attempt to route this signal.
 WARNING:Par:288 - The signal
    microblaze_0/microblaze_0/MicroBlaze_Core_I/Performance.Data_Flow_I/Register_File_I/Using_LUT6.All_RAM32M[10].ram32m_i_RAMD_D1_O has no
    load.  PAR will not attempt to route this signal.
 WARNING:Par:288 - The signal
-   microblaze_0/microblaze_0/MicroBlaze_Core_I/Performance.Data_Flow_I/Register_File_I/Using_LUT6.All_RAM32M[9].ram32m_i_RAMD_D1_O has no
-   load.  PAR will not attempt to route this signal.
-WARNING:Par:288 - The signal
    microblaze_0/microblaze_0/MicroBlaze_Core_I/Performance.Data_Flow_I/Register_File_I/Using_LUT6.All_RAM32M[7].ram32m_i_RAMD_D1_O has no
    load.  PAR will not attempt to route this signal.
 WARNING:Par:288 - The signal
-   microblaze_0/microblaze_0/MicroBlaze_Core_I/Performance.Data_Flow_I/Register_File_I/Using_LUT6.All_RAM32M[6].ram32m_i_RAMD_D1_O has no
+   microblaze_0/microblaze_0/MicroBlaze_Core_I/Performance.Data_Flow_I/Register_File_I/Using_LUT6.All_RAM32M[2].ram32m_i_RAMD_D1_O has no
+   load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal
+   microblaze_0/microblaze_0/MicroBlaze_Core_I/Performance.Data_Flow_I/Register_File_I/Using_LUT6.All_RAM32M[14].ram32m_i_RAMD_D1_O has no
+   load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal
+   microblaze_0/microblaze_0/MicroBlaze_Core_I/Performance.Data_Flow_I/Register_File_I/Using_LUT6.All_RAM32M[12].ram32m_i_RAMD_D1_O has no
    load.  PAR will not attempt to route this signal.
 WARNING:Par:288 - The signal
    microblaze_0/microblaze_0/MicroBlaze_Core_I/Performance.Data_Flow_I/Register_File_I/Using_LUT6.All_RAM32M[13].ram32m_i_RAMD_D1_O has no
    load.  PAR will not attempt to route this signal.
 WARNING:Par:288 - The signal
+   microblaze_0/microblaze_0/MicroBlaze_Core_I/Performance.Data_Flow_I/Register_File_I/Using_LUT6.All_RAM32M[8].ram32m_i_RAMD_D1_O has no
+   load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal
+   microblaze_0/microblaze_0/MicroBlaze_Core_I/Performance.Data_Flow_I/Register_File_I/Using_LUT6.All_RAM32M[9].ram32m_i_RAMD_D1_O has no
+   load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal
+   microblaze_0/microblaze_0/MicroBlaze_Core_I/Performance.Data_Flow_I/Register_File_I/Using_LUT6.All_RAM32M[3].ram32m_i_RAMD_D1_O has no
+   load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal microblaze_0_d_bram_ctrl_2_microblaze_0_bram_block_BRAM_Addr<31> has no load.  PAR will not attempt to route
+   this signal.
+WARNING:Par:288 - The signal
    microblaze_0/microblaze_0/MicroBlaze_Core_I/Performance.Data_Flow_I/Register_File_I/Using_LUT6.All_RAM32M[15].ram32m_i_RAMD_D1_O has no
+   load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal
+   microblaze_0/microblaze_0/MicroBlaze_Core_I/Performance.Data_Flow_I/Register_File_I/Using_LUT6.All_RAM32M[11].ram32m_i_RAMD_D1_O has no
    load.  PAR will not attempt to route this signal.
 WARNING:Par:288 - The signal
    microblaze_0/microblaze_0/MicroBlaze_Core_I/Performance.Data_Flow_I/Register_File_I/Using_LUT6.All_RAM32M[5].ram32m_i_RAMD_D1_O has no
    load.  PAR will not attempt to route this signal.
-WARNING:Par:288 - The signal microblaze_0_d_bram_ctrl_2_microblaze_0_bram_block_BRAM_Addr<31> has no load.  PAR will not attempt to route
-   this signal.
+WARNING:Par:288 - The signal
+   microblaze_0/microblaze_0/MicroBlaze_Core_I/Performance.Data_Flow_I/Register_File_I/Using_LUT6.All_RAM32M[4].ram32m_i_RAMD_D1_O has no
+   load.  PAR will not attempt to route this signal.
 WARNING:Par:288 - The signal microblaze_0_d_bram_ctrl_2_microblaze_0_bram_block_BRAM_Addr<30> has no load.  PAR will not attempt to route
    this signal.
-WARNING:Par:288 - The signal
-   microblaze_0/microblaze_0/MicroBlaze_Core_I/Performance.Data_Flow_I/Register_File_I/Using_LUT6.All_RAM32M[8].ram32m_i_RAMD_D1_O has no
-   load.  PAR will not attempt to route this signal.
 Starting Router
 
 
-Phase  1  : 16789 unrouted;      REAL time: 8 secs 
+Phase  1  : 16796 unrouted;      REAL time: 8 secs 
 
-Phase  2  : 13545 unrouted;      REAL time: 9 secs 
+Phase  2  : 13549 unrouted;      REAL time: 9 secs 
 
-Phase  3  : 5593 unrouted;      REAL time: 15 secs 
+Phase  3  : 5405 unrouted;      REAL time: 16 secs 
 
-Phase  4  : 5593 unrouted; (Setup:0, Hold:0, Component Switching Limit:0)     REAL time: 16 secs 
+Phase  4  : 5405 unrouted; (Setup:0, Hold:0, Component Switching Limit:0)     REAL time: 17 secs 
 
 Updating file: system.ncd with current fully routed design.
 
-Phase  5  : 0 unrouted; (Setup:0, Hold:0, Component Switching Limit:0)     REAL time: 21 secs 
+Phase  5  : 0 unrouted; (Setup:0, Hold:0, Component Switching Limit:0)     REAL time: 22 secs 
 
-Phase  6  : 0 unrouted; (Setup:0, Hold:0, Component Switching Limit:0)     REAL time: 21 secs 
+Phase  6  : 0 unrouted; (Setup:0, Hold:0, Component Switching Limit:0)     REAL time: 22 secs 
 
-Phase  7  : 0 unrouted; (Setup:0, Hold:0, Component Switching Limit:0)     REAL time: 21 secs 
+Phase  7  : 0 unrouted; (Setup:0, Hold:0, Component Switching Limit:0)     REAL time: 22 secs 
 
-Phase  8  : 0 unrouted; (Setup:0, Hold:0, Component Switching Limit:0)     REAL time: 21 secs 
+Phase  8  : 0 unrouted; (Setup:0, Hold:0, Component Switching Limit:0)     REAL time: 22 secs 
 
-Phase  9  : 0 unrouted; (Setup:0, Hold:0, Component Switching Limit:0)     REAL time: 21 secs 
+Phase  9  : 0 unrouted; (Setup:0, Hold:0, Component Switching Limit:0)     REAL time: 22 secs 
 
-Phase 10  : 0 unrouted; (Setup:0, Hold:0, Component Switching Limit:0)     REAL time: 22 secs 
-Total REAL time to Router completion: 22 secs 
+Phase 10  : 0 unrouted; (Setup:0, Hold:0, Component Switching Limit:0)     REAL time: 23 secs 
+Total REAL time to Router completion: 23 secs 
 Total CPU time to Router completion: 20 secs 
 
 Partition Implementation Status
@@ -574,29 +576,29 @@ Generating Clock Report
 +---------------------+--------------+------+------+------------+-------------+
 |        Clock Net    |   Resource   |Locked|Fanout|Net Skew(ns)|Max Delay(ns)|
 +---------------------+--------------+------+------+------------+-------------+
-|     clk_100_0000MHz | BUFGMUX_X3Y13| No   |  840 |  0.507     |  1.718      |
+|     clk_100_0000MHz |  BUFGMUX_X2Y3| No   |  843 |  0.511     |  1.722      |
 +---------------------+--------------+------+------+------------+-------------+
 |microblaze_0_debug_D |              |      |      |            |             |
-|              bg_Clk |  BUFGMUX_X2Y2| No   |   58 |  0.058     |  1.271      |
+|              bg_Clk | BUFGMUX_X3Y13| No   |   62 |  0.059     |  1.272      |
 +---------------------+--------------+------+------+------------+-------------+
 |pit_0/pit_0/USER_LOG |              |      |      |            |             |
 |IC_I/state_reg[1]_GN |              |      |      |            |             |
-|D_21_o_Mux_22_o_BUFG |              |      |      |            |             |
-|                     |  BUFGMUX_X2Y3| No   |    8 |  0.011     |  1.248      |
+|D_19_o_Mux_20_o_BUFG |              |      |      |            |             |
+|                     |  BUFGMUX_X2Y2| No   |    8 |  0.032     |  1.251      |
 +---------------------+--------------+------+------+------------+-------------+
 |microblaze_0_debug_D |              |      |      |            |             |
-|           bg_Update |         Local|      |   21 |  4.749     |  7.089      |
+|           bg_Update |         Local|      |   20 |  5.064     |  7.401      |
 +---------------------+--------------+------+------+------------+-------------+
 |pit_0/pit_0/USER_LOG |              |      |      |            |             |
 |IC_I/state_reg[1]_PW |              |      |      |            |             |
-|     R_53_o_Mux_87_o |         Local|      |    1 |  0.000     |  0.497      |
+|     R_53_o_Mux_87_o |         Local|      |    1 |  0.000     |  0.677      |
 +---------------------+--------------+------+------+------------+-------------+
 |pit_0/pit_0/USER_LOG |              |      |      |            |             |
 |IC_I/state_reg[1]_GN |              |      |      |            |             |
-|     D_83_o_Mux_84_o |         Local|      |    1 |  0.000     |  0.462      |
+|     D_83_o_Mux_84_o |         Local|      |    1 |  0.000     |  0.681      |
 +---------------------+--------------+------+------+------------+-------------+
 |fit_timer_0_Interrup |              |      |      |            |             |
-|                   t |         Local|      |    1 |  0.000     |  1.073      |
+|                   t |         Local|      |    1 |  0.000     |  0.909      |
 +---------------------+--------------+------+------+------------+-------------+
 
 * Net Skew is the difference between the minimum and maximum routing
@@ -618,8 +620,8 @@ Asterisk (*) preceding a constraint indicates it was not met.
   Constraint                                |    Check    | Worst Case |  Best Case | Timing |   Timing   
                                             |             |    Slack   | Achievable | Errors |    Score   
 ----------------------------------------------------------------------------------------------------------
-  TS_clock_generator_0_clock_generator_0_SI | SETUP       |     1.496ns|     8.504ns|       0|           0
-  G_PLL0_CLKOUT0 = PERIOD TIMEGRP         " | HOLD        |     0.235ns|            |       0|           0
+  TS_clock_generator_0_clock_generator_0_SI | SETUP       |     0.725ns|     9.275ns|       0|           0
+  G_PLL0_CLKOUT0 = PERIOD TIMEGRP         " | HOLD        |     0.236ns|            |       0|           0
   clock_generator_0_clock_generator_0_SIG_P |             |            |            |        |            
   LL0_CLKOUT0" TS_sys_clk_pin         HIGH  |             |            |            |        |            
   50%                                       |             |            |            |        |            
@@ -627,18 +629,18 @@ Asterisk (*) preceding a constraint indicates it was not met.
   TS_sys_clk_pin = PERIOD TIMEGRP "sys_clk_ | MINLOWPULSE |     6.666ns|     3.334ns|       0|           0
   pin" 100 MHz HIGH 50%                     |             |            |            |        |            
 ----------------------------------------------------------------------------------------------------------
-  PATH "TS_TIG_microblaze_0_Reset_path" TIG | SETUP       |         N/A|     3.399ns|     N/A|           0
+  PATH "TS_TIG_microblaze_0_Reset_path" TIG | SETUP       |         N/A|     3.201ns|     N/A|           0
 ----------------------------------------------------------------------------------------------------------
-  PATH "TS_TIG_microblaze_0_Interrupt_path" | SETUP       |         N/A|     2.029ns|     N/A|           0
+  PATH "TS_TIG_microblaze_0_Interrupt_path" | SETUP       |         N/A|     3.116ns|     N/A|           0
    TIG                                      |             |            |            |        |            
 ----------------------------------------------------------------------------------------------------------
   PATH "TS_axi4lite_0_reset_resync_path" TI | MAXDELAY    |         N/A|     4.922ns|     N/A|           0
   G                                         |             |            |            |        |            
 ----------------------------------------------------------------------------------------------------------
-  PATH "TS_TIG_microblaze_0_dlmb_POR_FF_I_p | SETUP       |         N/A|     1.349ns|     N/A|           0
+  PATH "TS_TIG_microblaze_0_dlmb_POR_FF_I_p | SETUP       |         N/A|     1.666ns|     N/A|           0
   ath" TIG                                  |             |            |            |        |            
 ----------------------------------------------------------------------------------------------------------
-  PATH "TS_TIG_microblaze_0_ilmb_POR_FF_I_p | SETUP       |         N/A|     2.530ns|     N/A|           0
+  PATH "TS_TIG_microblaze_0_ilmb_POR_FF_I_p | SETUP       |         N/A|     2.038ns|     N/A|           0
   ath" TIG                                  |             |            |            |        |            
 ----------------------------------------------------------------------------------------------------------
 
@@ -653,8 +655,8 @@ Derived Constraints for TS_sys_clk_pin
 |           Constraint          | Requirement |-------------+-------------|-------------+-------------|-------------+-------------|
 |                               |             |   Direct    | Derivative  |   Direct    | Derivative  |   Direct    | Derivative  |
 +-------------------------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+
-|TS_sys_clk_pin                 |     10.000ns|      3.334ns|      8.504ns|            0|            0|            0|       272857|
-| TS_clock_generator_0_clock_gen|     10.000ns|      8.504ns|          N/A|            0|            0|       272857|            0|
+|TS_sys_clk_pin                 |     10.000ns|      3.334ns|      9.275ns|            0|            0|            0|       272857|
+| TS_clock_generator_0_clock_gen|     10.000ns|      9.275ns|          N/A|            0|            0|       272857|            0|
 | erator_0_SIG_PLL0_CLKOUT0     |             |             |             |             |             |             |             |
 +-------------------------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+
 
@@ -672,10 +674,10 @@ All signals are completely routed.
 
 WARNING:Par:283 - There are 18 loadless signals in this design. This design will cause Bitgen to issue DRC warnings.
 
-Total REAL time to PAR completion: 25 secs 
+Total REAL time to PAR completion: 26 secs 
 Total CPU time to PAR completion: 21 secs 
 
-Peak Memory Usage:  450 MB
+Peak Memory Usage:  461 MB
 
 Placer: Placement generated during map.
 Routing: Completed - No errors found.
@@ -736,13 +738,13 @@ Timing summary:
 
 Timing errors: 0  Score: 0 (Setup/Max: 0, Hold: 0)
 
-Constraints cover 272871 paths, 0 nets, and 13173 connections
+Constraints cover 272871 paths, 0 nets, and 13176 connections
 
 Design statistics:
-   Minimum period:   8.504ns (Maximum frequency: 117.592MHz)
+   Minimum period:   9.275ns (Maximum frequency: 107.817MHz)
 
 
-Analysis completed Thu Nov 03 17:46:55 2016
+Analysis completed Fri Nov 04 17:07:43 2016
 --------------------------------------------------------------------------------
 
 Generating Report ...
